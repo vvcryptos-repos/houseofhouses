@@ -26,7 +26,7 @@ function createCube(position: Vector3, soundFile: string) {
             entity: clickBox,
             opts: {
                 button: InputAction.IA_POINTER,
-                hoverText: 'Play Music on'
+                hoverText: 'Play/Stop'
             } 
         },
         function(){
@@ -41,6 +41,6 @@ function createCube(position: Vector3, soundFile: string) {
 
 export function loadbuild(){
     createCube(Vector3.create(8,1,8), 'sounds/FL_NDF_110_C_RGUITAR.mp3')
-    createCube(Vector3.create(10,1,8), 'sounds/Clap.mp3')
+    createCube(Vector3.create(10,1,8), 'sounds/tropical-summer.mp3')
     createCube(Vector3.create(12,1,8), 'sounds/FL_NDF_KIT04_115_F_Fill-03.mp3')
 }
