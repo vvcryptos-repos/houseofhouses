@@ -1,5 +1,5 @@
-import { GltfContainer, InputAction, MeshCollider, MeshRenderer, Scale, Transform, engine, pointerEventsSystem, AudioSource } from "@dcl/sdk/ecs"
-import { Vector3 } from "@dcl/sdk/math"
+import { GltfContainer, InputAction, MeshCollider, MeshRenderer, Scale, Transform, engine, pointerEventsSystem, AudioSource, Material } from "@dcl/sdk/ecs"
+import { Vector3, Color4 } from "@dcl/sdk/math"
 
 function createCube(position: Vector3, soundFile: string) {
     const myEntity = engine.addEntity()
@@ -8,6 +8,8 @@ function createCube(position: Vector3, soundFile: string) {
     Transform.create(clickBox, {position: position, scale: Vector3.create(0.25, 0.25, 0.25)}) // Make the cube 75% smaller
     MeshRenderer.setBox(clickBox)
     MeshCollider.setBox(clickBox)
+
+    Material.setBasicMaterial(clickBox, { diffuseColor: Color4.Black() }) // Set initial color to black
 
     Transform.create(myEntity, {position: position, scale: Vector3.create(0.25, 0.25, 0.25)}) // Make the cube 75% smaller
     GltfContainer.create(myEntity, {src: "models/green.glb"})
@@ -33,6 +35,9 @@ function createCube(position: Vector3, soundFile: string) {
 
             // Modify its playing value
             mutableAudioSource.playing = !mutableAudioSource.playing
+
+            // Change color based on whether audio is playing
+            Material.setBasicMaterial(clickBox, { diffuseColor: mutableAudioSource.playing ? Color4.Green() : Color4.Black() })
         }
     )
 }
