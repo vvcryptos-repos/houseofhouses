@@ -5,13 +5,11 @@ function createCube(position: Vector3, soundFile: string) {
     const myEntity = engine.addEntity()
     const clickBox = engine.addEntity()
     
-    Transform.create(clickBox, {position: position})
-    Scale: Vector3.create(0.1,0.1,0.1)
+    Transform.create(clickBox, {position: position, scale: Vector3.create(0.25, 0.25, 0.25)}) // Make the cube 75% smaller
     MeshRenderer.setBox(clickBox)
     MeshCollider.setBox(clickBox)
 
-    Transform.create(myEntity, {position: position, scale: Vector3.create(5,5,5)})
-    
+    Transform.create(myEntity, {position: position, scale: Vector3.create(0.25, 0.25, 0.25)}) // Make the cube 75% smaller
     GltfContainer.create(myEntity, {src: "models/green.glb"})
 
     // Create AudioSource component
@@ -40,17 +38,15 @@ function createCube(position: Vector3, soundFile: string) {
 }
 
 export function loadbuild(){
-    // Create 3 cubes in the center of each parcel
-    for (let i = 0; i < 2; i++) {
-        for (let j = 0; j < 2; j++) {
-            for (let k = 0; k < 3; k++) {
-                createCube(Vector3.create(8 + i*16, 1, 8 + j*16 + k*2), `sounds/sound-${i}-${j}-${k}.mp3`)
-            }
-        }
-    }
+    let songNumber = 1;
 
-    // Create 3 cubes in the corner where the 4 parcels meet
+    // Create 12 cubes in the center of the 4 parcels
     for (let i = 0; i < 3; i++) {
-        createCube(Vector3.create(16, 1, 16 + i*2), `sounds/corner-sound-${i}.mp3`)
+        for (let j = 0; j < 4; j++) {
+            // Calculate song number, pad with zero if necessary
+            const song = String(songNumber).padStart(2, '0');
+            createCube(Vector3.create(14 + i*0.5, 0.75, 14 + j*0.5), `sounds/${song}.mp3`) // Adjust position to center the cubes and set the height to the middle of the avatar
+            songNumber++;
+        }
     }
 }
