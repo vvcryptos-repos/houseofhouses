@@ -1,5 +1,7 @@
-import { GltfContainer, InputAction, MeshCollider, MeshRenderer, Scale, Transform, engine, pointerEventsSystem, AudioSource, Material } from "@dcl/sdk/ecs"
+import { Entity, GltfContainer, InputAction, MeshCollider, MeshRenderer, Scale, Transform, engine, pointerEventsSystem, AudioSource, Material } from "@dcl/sdk/ecs"
 import { Vector3, Color4 } from "@dcl/sdk/math"
+
+let cubes: Entity[] = [] // Array to hold all cube entities
 
 function createCube(position: Vector3, soundFile: string) {
     const myEntity = engine.addEntity()
@@ -40,6 +42,9 @@ function createCube(position: Vector3, soundFile: string) {
             Material.setBasicMaterial(clickBox, { diffuseColor: mutableAudioSource.playing ? Color4.Green() : Color4.Black() })
         }
     )
+
+    // Add the cube entity to the cubes array
+    cubes.push(clickBox)
 }
 
 export function loadbuild(){
@@ -54,4 +59,29 @@ export function loadbuild(){
             songNumber++;
         }
     }
+
+    // Create reset button
+const resetButton = engine.addEntity()
+Transform.create(resetButton, {position: Vector3.create(16, 0.75, 13), scale: Vector3.create(0.5, 0.25, 0.01)}) // Adjust position and scale to make it look like a button
+MeshRenderer.setBox(resetButton)
+MeshCollider.setBox(resetButton) // Add a collider to the reset button
+Material.setBasicMaterial(resetButton, { diffuseColor: Color4.White() }) // Set button color to white
+
+pointerEventsSystem.onPointerDown(
+    {
+        entity: resetButton,
+        opts: {
+            button: InputAction.IA_POINTER,
+            hoverText: 'Reset'
+        } 
+    },
+    function(){
+        // Loop through all cubes and reset their color and stop their music
+        for (let cube of cubes) {
+            Material.setBasicMaterial(cube, { diffuseColor: Color4.Black() })
+            const mutableAudioSource = AudioSource.getMutable(cube)
+            mutableAudioSource.playing = false
+        }
+    }
+)
 }
