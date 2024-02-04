@@ -26,7 +26,7 @@ function createCube(position: Vector3, soundFile: string) {
             entity: clickBox,
             opts: {
                 button: InputAction.IA_POINTER,
-                hoverText: 'Play/Stop'
+                hoverText: 'Play Music on'
             } 
         },
         function(){
@@ -40,7 +40,17 @@ function createCube(position: Vector3, soundFile: string) {
 }
 
 export function loadbuild(){
-    createCube(Vector3.create(8,1,8), 'sounds/FL_NDF_110_C_RGUITAR.mp3')
-    createCube(Vector3.create(10,1,8), 'sounds/tropical-summer.mp3')
-    createCube(Vector3.create(12,1,8), 'sounds/FL_NDF_KIT04_115_F_Fill-03.mp3')
+    // Create 3 cubes in the center of each parcel
+    for (let i = 0; i < 2; i++) {
+        for (let j = 0; j < 2; j++) {
+            for (let k = 0; k < 3; k++) {
+                createCube(Vector3.create(8 + i*16, 1, 8 + j*16 + k*2), `sounds/sound-${i}-${j}-${k}.mp3`)
+            }
+        }
+    }
+
+    // Create 3 cubes in the corner where the 4 parcels meet
+    for (let i = 0; i < 3; i++) {
+        createCube(Vector3.create(16, 1, 16 + i*2), `sounds/corner-sound-${i}.mp3`)
+    }
 }
