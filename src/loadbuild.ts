@@ -84,4 +84,12 @@ pointerEventsSystem.onPointerDown(
         }
     }
 )
+
+    // Create house entity
+    const house = engine.addEntity()
+    Transform.create(house, {position: Vector3.create(16, 0, 16), scale: Vector3.create(1, 1, 1)}) // Adjust position and scale to fit the 4 parcels
+    GltfContainer.create(house, {src: "models/house_sin_collider.glb"})
+
+
+
 }
