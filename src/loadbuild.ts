@@ -51,29 +51,30 @@ export function loadbuild(){
     let songNumber = 1;
 
     // Create 12 cubes in the center of the 4 parcels
-    for (let i = 0; i < 3; i++) {
-        for (let j = 0; j < 4; j++) {
-            // Calculate song number, pad with zero if necessary
-            const song = String(songNumber).padStart(2, '0');
-            createCube(Vector3.create(14 + i*0.5, 0.75, 14 + j*0.5), `sounds/${song}.mp3`) // Adjust position to center the cubes and set the height to the middle of the avatar
-            songNumber++;
-        }
+for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 4; j++) {
+        // Calculate song number, pad with zero if necessary
+        const song = String(songNumber).padStart(2, '0');
+        createCube(Vector3.create(15 + i*0.5, 4.5, 16 + j*0.5), `sounds/${song}.mp3`) // Adjust position to center the cubes and set the height to the middle of the avatar
+        songNumber++;
     }
+}
+
 
     // Create reset button
-const resetButton = engine.addEntity()
-Transform.create(resetButton, {position: Vector3.create(16, 0.75, 13), scale: Vector3.create(0.5, 0.25, 0.01)}) // Adjust position and scale to make it look like a button
-MeshRenderer.setBox(resetButton)
-MeshCollider.setBox(resetButton) // Add a collider to the reset button
-Material.setBasicMaterial(resetButton, { diffuseColor: Color4.White() }) // Set button color to white
+    const resetButton = engine.addEntity()
+    Transform.create(resetButton, {position: Vector3.create(15, 4.5, 18), scale: Vector3.create(0.5, 0.25, 0.01)}) // Adjust position and scale to make it look like a button
+    MeshRenderer.setBox(resetButton)
+    MeshCollider.setBox(resetButton) // Add a collider to the reset button
+    Material.setBasicMaterial(resetButton, { diffuseColor: Color4.White() }) // Set button color to white
 
-pointerEventsSystem.onPointerDown(
-    {
-        entity: resetButton,
-        opts: {
-            button: InputAction.IA_POINTER,
-            hoverText: 'Reset'
-        } 
+    pointerEventsSystem.onPointerDown(
+        {
+            entity: resetButton,
+            opts: {
+                button: InputAction.IA_POINTER,
+                hoverText: 'Reset'
+            } 
     },
     function(){
         // Loop through all cubes and reset their color and stop their music
