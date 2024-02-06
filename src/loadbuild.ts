@@ -8,13 +8,13 @@ function createCube(position: Vector3, soundFile: string) {
     const clickBox = engine.addEntity()
     
     Transform.create(clickBox, {position: position, scale: Vector3.create(0.25, 0.25, 0.25)}) // Make the cube 75% smaller
-    MeshRenderer.setBox(clickBox)
-    MeshCollider.setBox(clickBox)
+    MeshRenderer.setSphere(clickBox)
+    MeshCollider.setSphere(clickBox)
 
-    Material.setBasicMaterial(clickBox, { diffuseColor: Color4.Yellow() }) // Set initial color to yellow
+    Material.setBasicMaterial(clickBox, { diffuseColor: Color4.Red() }) // Set initial color to yellow
 
     Transform.create(myEntity, {position: position, scale: Vector3.create(0.25, 0.25, 0.25)}) // Make the cube 75% smaller
-    GltfContainer.create(myEntity, {src: "models/green.glb"})
+    GltfContainer.create(myEntity, {src: "models/botton.glb"})
 
     // Create AudioSource component
     const audioSource = AudioSource.create(clickBox, {
@@ -39,7 +39,7 @@ function createCube(position: Vector3, soundFile: string) {
             mutableAudioSource.playing = !mutableAudioSource.playing
 
             // Change color based on whether audio is playing
-            Material.setBasicMaterial(clickBox, { diffuseColor: mutableAudioSource.playing ? Color4.Green() : Color4.Yellow() })
+            Material.setBasicMaterial(clickBox, { diffuseColor: mutableAudioSource.playing ? Color4.Green() : Color4.Red() })
         }
     )
 
@@ -79,7 +79,7 @@ for (let i = 0; i < 3; i++) {
     function(){
         // Loop through all cubes and reset their color and stop their music
         for (let cube of cubes) {
-            Material.setBasicMaterial(cube, { diffuseColor: Color4.Black() })
+            Material.setBasicMaterial(cube, { diffuseColor: Color4.Red() })
             const mutableAudioSource = AudioSource.getMutable(cube)
             mutableAudioSource.playing = false
         }
