@@ -11,7 +11,7 @@ function createCube(position: Vector3, soundFile: string) {
     MeshRenderer.setBox(clickBox)
     MeshCollider.setBox(clickBox)
 
-    Material.setBasicMaterial(clickBox, { diffuseColor: Color4.Black() }) // Set initial color to black
+    Material.setBasicMaterial(clickBox, { diffuseColor: Color4.Yellow() }) // Set initial color to yellow
 
     Transform.create(myEntity, {position: position, scale: Vector3.create(0.25, 0.25, 0.25)}) // Make the cube 75% smaller
     GltfContainer.create(myEntity, {src: "models/green.glb"})
@@ -39,7 +39,7 @@ function createCube(position: Vector3, soundFile: string) {
             mutableAudioSource.playing = !mutableAudioSource.playing
 
             // Change color based on whether audio is playing
-            Material.setBasicMaterial(clickBox, { diffuseColor: mutableAudioSource.playing ? Color4.Green() : Color4.Black() })
+            Material.setBasicMaterial(clickBox, { diffuseColor: mutableAudioSource.playing ? Color4.Green() : Color4.Yellow() })
         }
     )
 
@@ -55,7 +55,7 @@ for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 4; j++) {
         // Calculate song number, pad with zero if necessary
         const song = String(songNumber).padStart(2, '0');
-        createCube(Vector3.create(15 + i*0.5, 4.5, 16 + j*0.5), `sounds/${song}.mp3`) // Adjust position to center the cubes and set the height to the middle of the avatar
+        createCube(Vector3.create(15.5 + i*0.5, 6.5, 16 + j*0.5), `sounds/${song}.mp3`) // Adjust position to center the cubes and set the height to the middle of the avatar
         songNumber++;
     }
 }
@@ -63,7 +63,7 @@ for (let i = 0; i < 3; i++) {
 
     // Create reset button
     const resetButton = engine.addEntity()
-    Transform.create(resetButton, {position: Vector3.create(15, 4.5, 18), scale: Vector3.create(0.5, 0.25, 0.01)}) // Adjust position and scale to make it look like a button
+    Transform.create(resetButton, {position: Vector3.create(16, 7, 18), scale: Vector3.create(0.5, 0.25, 0.01)}) // Adjust position and scale to make it look like a button
     MeshRenderer.setBox(resetButton)
     MeshCollider.setBox(resetButton) // Add a collider to the reset button
     Material.setBasicMaterial(resetButton, { diffuseColor: Color4.White() }) // Set button color to white
@@ -89,7 +89,7 @@ for (let i = 0; i < 3; i++) {
     // Create house entity
     const house = engine.addEntity()
     Transform.create(house, {position: Vector3.create(16, 0, 16), scale: Vector3.create(1, 1, 1)}) // Adjust position and scale to fit the 4 parcels
-    GltfContainer.create(house, {src: "models/house_sin_collider.glb"})
+    GltfContainer.create(house, {src: "models/houseofhouse.glb"})
 
 
 
