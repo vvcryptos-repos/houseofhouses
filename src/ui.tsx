@@ -1,76 +1,67 @@
-  import {
-    engine,
-    Transform,
-  } from '@dcl/sdk/ecs'
-  import { Color4 } from '@dcl/sdk/math'
-  import ReactEcs, { Button, Label, ReactEcsRenderer, UiEntity } from '@dcl/sdk/react-ecs'
+import {
+  engine,
+  Transform,
+} from '@dcl/sdk/ecs'
+import { Color4 } from '@dcl/sdk/math'
+import ReactEcs, { Button, Label, ReactEcsRenderer, UiEntity } from '@dcl/sdk/react-ecs'
 
-  export function setupUi() {
-    ReactEcsRenderer.setUiRenderer(uiComponent)
-  }
+export function setupUi() {
+  ReactEcsRenderer.setUiRenderer(uiComponent)
+}
 
-  const uiComponent = () => (
+const uiComponent = () => (
+  <UiEntity
+    uiTransform={{
+      width: 190, // 380 / 2
+      height: 100, // 200 / 2
+      margin: '8px 0 4px 180px', // 16px / 2, 8px / 2, 180px / 2
+      padding: 1.5, // 3 / 2
+    }}
+    uiBackground={{ color: Color4.fromHexString("#0b0649") }}
+  >
     <UiEntity
       uiTransform={{
-        width: 400,
-        height: 230,
-        margin: '16px 0 8px 270px',
-        padding: 4,
+        width: '100%',
+        height: '100%',
+        flexDirection: 'column',
+        alignItems: 'center',
       }}
-      uiBackground={{ color: Color4.create(0.5, 0.8, 0.1, 0.6) }}
+      uiBackground={{ color: Color4.fromHexString("#0b0649") }}
     >
       <UiEntity
         uiTransform={{
           width: '100%',
-          height: '100%',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'space-between'
+          height: 25, // 50 / 2
+          margin: '4px 0' // 8px / 2
         }}
-        uiBackground={{ color: Color4.fromHexString("#70ac76ff") }}
-      >
-        <UiEntity
-          uiTransform={{
-            width: '100%',
-            height: 50,
-            margin: '8px 0'
-          }}
-          uiBackground={{
-            textureMode: 'center',
-            texture: {
-              src: 'images/scene-thumbnail.png',
-            },
-          }}
-          uiText={{ value: 'SDK7', fontSize: 18 }}
-        />
-        <Label
-          onMouseDown={() => {console.log('Player Position clicked !')}}
-          value={`Player: ${getPlayerPosition()}`}
-          fontSize={18}
-          uiTransform={{ width: '100%', height: 30 } }
-        />
-        <Label
-          onMouseDown={() => {console.log('# Cubes clicked !')}}
-          value={`Cubes:`}
-          fontSize={18}
-          uiTransform={{ width: '100%', height: 30 } }
-        />
-        <Button
-          uiTransform={{ width: 100, height: 40, margin: 8 }}
-          value='test'
-          variant='primary'
-          fontSize={14}
-          onMouseDown={() => {
-                    }}
-        />
-      </UiEntity>
+        uiBackground={{
+          textureMode: 'center',
+          texture: {
+            src: 'images/scene-thumbnail.png',
+          },
+        }}
+      />
+    
+      <Label
+        onMouseDown={() => {console.log('# Cubes clicked !')}}
+        value={`Welcome to The house of houses`}
+        fontSize={9} // 18 / 2
+        uiTransform={{ width: '100%', height: 15 }} // 30 / 2
+      />
+      <Label
+        value={`Go to the top of the Big House.
+        Touch the spheres and create your own house music.`}
+        fontSize={7} // 14 / 2
+        uiTransform={{ width: '100%', height: 15 }} // 30 / 2
+      />
+      <Button
+        uiBackground={{ color: Color4.fromHexString("#0b0649") }}
+        uiTransform={{ width: 50, height: 20, margin: 4 }} // 100 / 2, 40 / 2, 8 / 2
+        value='Welcome to The house of houses'
+        variant='primary'
+        fontSize={7} // 14 / 2
+        onMouseDown={() => {}}
+      />
     </UiEntity>
-  )
-
-  function getPlayerPosition() {
-    const playerPosition = Transform.getOrNull(engine.PlayerEntity)
-    if (!playerPosition) return ' no data yet'
-    const { x, y, z } = playerPosition.position
-    return `{X: ${x.toFixed(2)}, Y: ${y.toFixed(2)}, z: ${z.toFixed(2)} }`
-  }
-
+  </UiEntity>
+)
