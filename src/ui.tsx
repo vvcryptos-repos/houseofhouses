@@ -12,9 +12,9 @@ export function setupUi() {
 const uiComponent = () => (
   <UiEntity
     uiTransform={{
-      width: 190, // 380 / 2
-      height: 100, // 200 / 2
-      margin: '8px 0 4px 180px', // 16px / 2, 8px / 2, 180px / 2
+      width: 200, // 380 / 2
+      height: 120, // 200 / 2
+      margin: '16px 0 4px 250px', // 16px / 2, 8px / 2, 180px / 2
       padding: 1.5, // 3 / 2
     }}
     uiBackground={{ color: Color4.fromHexString("#0b0649") }}
@@ -31,7 +31,7 @@ const uiComponent = () => (
       <UiEntity
         uiTransform={{
           width: '100%',
-          height: 25, // 50 / 2
+          height: 50, // 50 / 2
           margin: '4px 0' // 8px / 2
         }}
         uiBackground={{
@@ -49,19 +49,14 @@ const uiComponent = () => (
         uiTransform={{ width: '100%', height: 15 }} // 30 / 2
       />
       <Label
-        value={`Go to the top of the Big House.
-        Touch the spheres and create your own house music.`}
+        value={`
+        Go to the top of the Big House.
+        
+        Interact with the spheres to make house music`}
         fontSize={7} // 14 / 2
         uiTransform={{ width: '100%', height: 15 }} // 30 / 2
       />
-      <Button
-        uiBackground={{ color: Color4.fromHexString("#0b0649") }}
-        uiTransform={{ width: 50, height: 20, margin: 4 }} // 100 / 2, 40 / 2, 8 / 2
-        value='Welcome to The house of houses'
-        variant='primary'
-        fontSize={7} // 14 / 2
-        onMouseDown={() => {}}
-      />
+      
     </UiEntity>
   </UiEntity>
 )
