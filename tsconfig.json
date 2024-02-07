@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
     "allowJs": true,
-    "strict": true,
-    "types": ["node"]
+    "strict": true
   },
   "include": [
     "src/**/*.ts",

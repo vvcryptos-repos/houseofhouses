@@ -1,13 +1,11 @@
 import { Entity, GltfContainer, InputAction, MeshCollider, MeshRenderer, Scale, Transform, engine, pointerEventsSystem, AudioSource, Material } from "@dcl/sdk/ecs"
 import { Vector3, Color4 } from "@dcl/sdk/math"
-import { movePlayerTo } from '../system/RestrictedActions'
+import { movePlayerTo } from '~system/RestrictedActions'
 
 
+let cubes: Entity[] = []
+let spherePositions: Vector3[] = [] // Array to hold the positions of teleport spheres
 
-
-
-
-let cubes: Entity[] = [] // Array to hold all cube entities
 
 function createCube(position: Vector3, soundFile: string) {
     const myEntity = engine.addEntity()
@@ -107,33 +105,33 @@ export function loadbuild(){
     }
 // teleport
 
-function createTeleportSphere(position: Vector3) {
-    const sphere = engine.addEntity()
-    Transform.create(sphere, {position: position, scale: Vector3.create(0.25, 0.25, 0.25)})
-    MeshRenderer.setSphere(sphere)
-    MeshCollider.setSphere(sphere)
-    Material.setBasicMaterial(sphere, { diffuseColor: Color4.Blue() })
+        function createTeleportSphere(position: Vector3) {
+            const sphere = engine.addEntity()
+            Transform.create(sphere, {position: position, scale: Vector3.create(0.25, 0.25, 0.25)})
+            MeshRenderer.setSphere(sphere)
+            MeshCollider.setSphere(sphere)
+            Material.setBasicMaterial(sphere, { diffuseColor: Color4.Blue() })
 
-    pointerEventsSystem.onPointerDown(
-        {
-            entity: sphere,
-            opts: {
-                button: InputAction.IA_POINTER,
-                hoverText: 'Teleport to Reset'
-            } 
-        },
-        function() {
-            movePlayerTo({ newRelativePosition: Vector3.create(16, 7, 18) });
+            spherePositions.push(position) // Guardar la posición de la esfera para la detección de proximidad
         }
-    )
-}
 
-// ... (resto del código para crear otras entidades y esferas)
+        // Sistema para revisar la proximidad del jugador a las esferas y teletransportarlo
+        engine.addSystem((deltaTime) => {
+            if (!Transform.has(engine.PlayerEntity)) return
+            const playerPosition = Transform.get(engine.PlayerEntity).position
 
-// Crear esferas en las esquinas de cada parcela
-createTeleportSphere(Vector3.create(5, 1, 5))
-createTeleportSphere(Vector3.create(4, 1.5, 25))
-createTeleportSphere(Vector3.create(25, 1.5, 8))
-createTeleportSphere(Vector3.create(27, 1.5, 25))
+            for (const spherePosition of spherePositions) {
+                if (Vector3.distance(playerPosition, spherePosition) < 1) { // 2 es el umbral de proximidad
+                    movePlayerTo({ newRelativePosition: Vector3.create(16, 7, 18) })
+                    break
+                }
+            }
+        })
 
-}
+        // Crear esferas en las esquinas de cada parcela (llamadas a createTeleportSphere)
+        createTeleportSphere(Vector3.create(5, 1, 5))
+        createTeleportSphere(Vector3.create(4, 1.5, 25))
+        createTeleportSphere(Vector3.create(25, 1.5, 8))
+        createTeleportSphere(Vector3.create(27, 1.5, 25))
+
+    }
