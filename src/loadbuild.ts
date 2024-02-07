@@ -72,30 +72,36 @@ function createCube(position: Vector3, soundFile: string) {
                     }
                 }
 
-            // Create reset button
-            const resetButton = engine.addEntity()
-            Transform.create(resetButton, {position: Vector3.create(16, 7, 18), scale: Vector3.create(0.5, 0.25, 0.01)}) // Adjust position and scale to make it look like a button
-            GltfContainer.create(resetButton, {src: "models/fonts.glb"}) // Load the custom model
-            MeshCollider.setBox(resetButton) // Add a collider to the reset button
-            Material.setBasicMaterial(resetButton, { diffuseColor: Color4.White() }) // Set button color to white
+            /// Create reset button
+               // Create reset button
+                const resetButton = engine.addEntity()
+                Transform.create(resetButton, {position: Vector3.create(15.5, 7, 18), scale: Vector3.create(1, 1, 1)}) // Adjust position and scale to make it look like a button
+                GltfContainer.create(resetButton, {src: "models/fonts.glb"}) // Load the custom model
+                MeshCollider.setBox(resetButton)
+                Material.setBasicMaterial(resetButton, { diffuseColor: Color4.White() }) // Set button color to white
 
-        pointerEventsSystem.onPointerDown(
-        {
-            entity: resetButton,
-            opts: {
-                button: InputAction.IA_POINTER,
-                hoverText: 'Reset'
-            } 
-        },
-        function(){
-            // Loop through all cubes and reset their color and stop their music
-            for (let cube of cubes) {
-                Material.setBasicMaterial(cube, { diffuseColor: Color4.Black() })
-                const mutableAudioSource = AudioSource.getMutable(cube)
-                mutableAudioSource.playing = false
-            }
-        }
-    )
+            pointerEventsSystem.onPointerDown(
+                {
+                    entity: resetButton,
+                    opts: {
+                        button: InputAction.IA_POINTER,
+                        hoverText: 'Reset'
+                    } 
+                },
+                function(){
+                    // Loop through all cubes and reset their color and stop their music
+                    for (let cube of cubes) {
+                        // Fetch mutable version of audio source component
+                        const mutableAudioSource = AudioSource.getMutable(cube)
+            
+                        // Modify its playing value
+                        mutableAudioSource.playing = false
+            
+                        // Change color based on whether audio is playing
+                        Material.setBasicMaterial(cube, { diffuseColor: mutableAudioSource.playing ? Color4.Green() : Color4.Yellow() })
+                    }
+                }
+            )
 
         // Create house entity
         const house = engine.addEntity()
@@ -132,7 +138,7 @@ function createTeleportSphere(position: Vector3, color: Color4) {
 
             for (const spherePosition of spherePositions) {
                 if (Vector3.distance(playerPosition, spherePosition) < 1) { // 2 es el umbral de proximidad
-                    movePlayerTo({ newRelativePosition: Vector3.create(16, 7, 18) })
+                    movePlayerTo({ newRelativePosition: Vector3.create(16, 7, 17) })
                     break
                 }
             }
