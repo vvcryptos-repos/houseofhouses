@@ -12,10 +12,10 @@ export function setupUi() {
 const uiComponent = () => (
   <UiEntity
     uiTransform={{
-      width: 200, // 380 / 2
-      height: 120, // 200 / 2
+      width: 380, // 380 / 2
+      height: 200, // 200 / 2
       margin: '16px 0 4px 250px', // 16px / 2, 8px / 2, 180px / 2
-      padding: 1.5, // 3 / 2
+      padding: 3, // 3 / 2
     }}
     uiBackground={{ color: Color4.fromHexString("#0b0649") }}
   >
@@ -32,7 +32,7 @@ const uiComponent = () => (
         uiTransform={{
           width: '100%',
           height: 50, // 50 / 2
-          margin: '4px 0' // 8px / 2
+          margin: '8px 0' // 8px / 2
         }}
         uiBackground={{
           textureMode: 'center',
@@ -45,16 +45,16 @@ const uiComponent = () => (
       <Label
         onMouseDown={() => {console.log('# Cubes clicked !')}}
         value={`Welcome to The house of houses`}
-        fontSize={9} // 18 / 2
-        uiTransform={{ width: '100%', height: 15 }} // 30 / 2
+        fontSize={18} // 18 / 2
+        uiTransform={{ width: '100%', height: 30 }} // 30 / 2
       />
       <Label
         value={`
-        Go to the top of the Big House.
-        
-        Interact with the spheres to make house music`}
-        fontSize={7} // 14 / 2
-        uiTransform={{ width: '100%', height: 15 }} // 30 / 2
+              
+        Find the spheres in the houses and 
+        create your house music`}
+        fontSize={14} // 14 / 2
+        uiTransform={{ width: '100%', height: 30 }} // 30 / 2
       />
       
     </UiEntity>
