@@ -71,10 +71,9 @@ for (let i = colors.length - 1; i > 0; i--) {
                         }
                     }
 
-            /// Create reset button
                // Create reset button
                 const resetButton = engine.addEntity()
-                Transform.create(resetButton, {position: Vector3.create(15.5, 8, 18), scale: Vector3.create(0.25, 0.25, 0.25)}) // Adjust position and scale to make it look like a button
+                Transform.create(resetButton, {position: Vector3.create(15.5, 8.5, 18), scale: Vector3.create(0.25, 0.25, 0.25)}) // Adjust position and scale to make it look like a button
                 GltfContainer.create(resetButton, {src: "models/fonts.glb"}) // Load the custom model
                 MeshCollider.setBox(resetButton)
                 Material.setBasicMaterial(resetButton, { diffuseColor: Color4.White() }) // Set button color to white
