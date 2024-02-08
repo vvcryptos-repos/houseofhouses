@@ -120,7 +120,7 @@ for (let i = colors.length - 1; i > 0; i--) {
 
 function createTeleportSphere(position: Vector3, color: Color4) {
     const sphere = engine.addEntity()
-    Transform.create(sphere, {position: position, scale: Vector3.create(2.25, 2.25, 2.25)}) // Make the sphere 3 times bigger
+    Transform.create(sphere, {position: position, scale: Vector3.create (0.25, 0.25, 0.25)}) // Make the sphere 3 times bigger
     MeshRenderer.setSphere(sphere)
     Material.setPbrMaterial(sphere, {
         albedoColor: color,
@@ -144,9 +144,9 @@ function createTeleportSphere(position: Vector3, color: Color4) {
         })
 
         // Crear esferas en las esquinas de cada parcela (llamadas a createTeleportSphere)
-createTeleportSphere(Vector3.create(5, 1, 5), Color4.Yellow())
-createTeleportSphere(Vector3.create(4, 1.5, 25), Color4.Green())
-createTeleportSphere(Vector3.create(25, 1.5, 8), Color4.Purple())
-createTeleportSphere(Vector3.create(27, 1.5, 25), Color4.Blue())
+createTeleportSphere(Vector3.create(7.2, 4, 7.2), Color4.Yellow())
+createTeleportSphere(Vector3.create(6, 4.5, 23), Color4.Green())
+createTeleportSphere(Vector3.create(24, 1.5, 10.8), Color4.Purple())
+createTeleportSphere(Vector3.create(25, 3, 24), Color4.Blue())
 
     }
