@@ -2,15 +2,15 @@
 	"ecs7": true,
 	"runtimeVersion": "7",
 	"display": {
-		"title": "SDK7 Scene Template",
-		"description": "template scene with SDK7",
+		"title": "The house of houses",
+		"description": "Application to sandstorm THH - C&G Round #2 -  Create your own music house",
 		"navmapThumbnail": "images/scene-thumbnail.png",
 		"favicon": "favicon_asset"
 	},
 	"owner": "",
 	"contact": {
-		"name": "SDK",
-		"email": ""
+		"name": "vvcryptos",
+		"email": "vvcryptos@gmail.com"
 	},
 	"main": "bin/index.js",
 	"tags": [],
@@ -49,5 +49,9 @@
 		"ALLOW_TO_MOVE_PLAYER_INSIDE_SCENE"
 		
 	],
-	"featureToggles": {}
+	"featureToggles": {},
+
+	"worldConfiguration": {
+		"name": "041.dcl.eth"
+	  }
 }
